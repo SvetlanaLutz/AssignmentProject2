@@ -35,10 +35,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         targetPosition.transform.localPosition = new Vector3(enemyPosition.transform.localPosition.x, enemyPosition.transform.localPosition.y, 11f);
-
-        GameObject[] heartObject = GameObject.FindGameObjectsWithTag("Heart");
-        for (int i = 0; i < heartObject.Length; i++) heart[i] = heartObject[i].GetComponent<Image>();
-
+        string a = "";
         for (int i = 0; i < heart.Length; i++) heart[i].sprite = heartSprite[0];
         scoreHeart = heart.Length;
     }
@@ -46,7 +43,6 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         finalTextScore.text = "Score: " + score;
-
         scoreText.GetComponent<Text>().text = "x" + score;
 
         if (isMoveGame) MoveGame();
@@ -101,7 +97,7 @@ public class GameController : MonoBehaviour
         isTakeOneHeartAway = false;
         isFirstScore = false;
 
-        for (int i = index; i > 1; i--) heart[i].sprite = heartSprite[0];
+        for (int i = 0; i < index; i++) heart[i].sprite = heartSprite[0];
         heart[index].sprite = heartSprite[1];
     }
 

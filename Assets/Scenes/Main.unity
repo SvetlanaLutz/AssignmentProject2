@@ -1575,9 +1575,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3f9cf720ae51d2544aa35bad2cd2cb6e, type: 3}
   - {fileID: 21300000, guid: 40714911cdc51974d8fc1ed6349bdd50, type: 3}
   heart:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1937127414}
+  - {fileID: 2113354372}
+  - {fileID: 482676522}
   finalTextScore: {fileID: 573245543}
   force: 0
   CharacterBotPrefab: {fileID: 3730393487068472198, guid: 9c4fe17c14bf83047962dc48225c8223,
