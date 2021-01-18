@@ -8,6 +8,7 @@ public class CanvasController : MonoBehaviour
     public void ReloadGame()
     {
         GameController.score = 0;
+        GameController.isGame = true;
         Enemy.isMoveToFire = false;
         Enemy.isAlpha = true;
         Enemy.isDead = false;

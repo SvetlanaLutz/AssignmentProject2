@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
     private Animation _animation => GetComponent<Animation>();
 
     public AnimationClip deadColors;
-
     public GameObject Lose => GameObject.FindGameObjectWithTag("Lose");
     public GameObject Colors;
     public GameObject FirePrefab;
@@ -95,6 +94,7 @@ public class Enemy : MonoBehaviour
 
     private void ViewLose()
     {
+        GameController.isGame = false;
         nameColor = null;
         Time.timeScale = 0;
         Colors.SetActive(false);
@@ -103,7 +103,13 @@ public class Enemy : MonoBehaviour
 
     private void PlayAnimation(int index)
     {
-        if (index == 0) Instantiate(FirePrefab, transform.position, transform.rotation);
+        if (index == 0)
+        {
+            Instantiate(FirePrefab, transform);
+            GameObject fire = GameObject.FindGameObjectWithTag("Fire");
+            fire.transform.parent = GameController.targetPosition.transform;
+            fire.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        }
         nameColor = null;
         _animation.clip = animationClip[index];
         _animation.Play();

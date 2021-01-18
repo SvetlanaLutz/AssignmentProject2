@@ -109,16 +109,8 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 6643e49e2e060de4c90d99bd5b9d0e07, type: 2}
   - {fileID: 7400000, guid: 0ffecb8302e032b4683e2a70c33dac59, type: 2}
   - {fileID: 7400000, guid: 45f401f64a314fc49838bbd208f20e15, type: 2}
-  heartSprite:
-  - {fileID: 21300000, guid: 3f9cf720ae51d2544aa35bad2cd2cb6e, type: 3}
-  - {fileID: 21300000, guid: 40714911cdc51974d8fc1ed6349bdd50, type: 3}
-  heart:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   deadColors: {fileID: 7400000, guid: b666da3d9b901a3469b64b9f87be874d, type: 2}
   Colors: {fileID: 153276601454102633, guid: 9b775c04396728847898d50d9d19976c, type: 3}
-  Lose: {fileID: 0}
   FirePrefab: {fileID: 2625211870320279383, guid: e925d55ef359517429e0b4a0802c31fa,
     type: 3}
   ReturnTime: 1

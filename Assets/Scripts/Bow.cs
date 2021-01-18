@@ -35,44 +35,56 @@ public class Bow : MonoBehaviour
 
     private void Update()
     {
-        if (!isMouseDown)
+        if (GameController.isGame)
         {
-            isMouseDown = true;
-            InstantiateArrow(transform.GetChild(0).transform);
-        }
+            if (!isMouseDown)
+            {
+                isMouseDown = true;
+                InstantiateArrow(transform.GetChild(0).transform);
+            }
 
-        if (!isArrow)
-        {
-            _rigidbody = transform.GetChild(0).GetChild(0).GetComponent<Rigidbody2D>();
-            Vector2 directionRigidbody = _rigidbody.velocity;
+            if (!isArrow)
+            {
+                _rigidbody = transform.GetChild(0).GetChild(0).GetComponent<Rigidbody2D>();
+                Vector2 directionRigidbody = _rigidbody.velocity;
 
-            float angle = Mathf.Atan2(directionRigidbody.x, directionRigidbody.y) * Mathf.Rad2Deg * (-1);
-            _transformArrow.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                float angle = Mathf.Atan2(directionRigidbody.x, directionRigidbody.y) * Mathf.Rad2Deg * (-1);
+                _transformArrow.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
         }
     }
 
     private void OnMouseDown()
     {
-        transform.right = direction;
-        for (int i = 0; i < pointCount; i++) _arrayTrajectoryPoints[i] = Instantiate(trajectoryPoint, transform);
+        if(GameController.isGame)
+        {
+            transform.right = direction;
+            for (int i = 0; i < pointCount; i++) _arrayTrajectoryPoints[i] = Instantiate(trajectoryPoint, transform);
+        }
     }
 
     private void OnMouseDrag()
     {
-        transform.right = direction;
-        for (int i = 0; i < pointCount; i++) _arrayTrajectoryPoints[i].transform.position = CalculatePointPosition(i * 0.08f);
+        if (GameController.isGame)
+        {
+            transform.right = direction;
+            for (int i = 0; i < pointCount; i++) _arrayTrajectoryPoints[i].transform.position = CalculatePointPosition(i * 0.08f);
+        }
     }
 
     private void OnMouseUp()
     {
-        isArrow = false;
+        if (GameController.isGame)
+        {
+            isArrow = false;
 
-        _rigidbody = transform.GetChild(0).GetChild(0).GetComponent<Rigidbody2D>();
-        _rigidbody.gravityScale = 1;
-        _rigidbody.velocity = new Vector2(direction.x * forceRepulsion, direction.y * forceRepulsion);
-        _transformArrow.GetComponent<PolygonCollider2D>().enabled = true;
+            _rigidbody = transform.GetChild(0).GetChild(0).GetComponent<Rigidbody2D>();
+            _rigidbody.gravityScale = 1;
+            _rigidbody.velocity = new Vector2(direction.x * forceRepulsion, direction.y * forceRepulsion);
+            _transformArrow.GetComponent<PolygonCollider2D>().enabled = true;
 
-        for (int i = 0; i < pointCount; i++) Destroy(_arrayTrajectoryPoints[i]);
+            for (int i = 0; i < pointCount; i++) Destroy(_arrayTrajectoryPoints[i]);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

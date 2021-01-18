@@ -6,18 +6,22 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    public static GameObject targetPosition => GameObject.FindGameObjectWithTag("Target");
+    private GameObject enemyPosition => GameObject.FindGameObjectWithTag("Player");
+
     [SerializeField] Sprite[] heartSprite;
     [SerializeField] Image[] heart;
     [SerializeField] Text finalTextScore;
 
     public static int scoreHeart;
+    public static bool isGame = true;
     public static bool isFirstScore = true;
     public static bool isTakeOneHeartAway = false;
     private Camera _camera => Camera.main;
 
     private bool isTraffic = true;
     private bool isInstantiate = false;
-    private bool isNormalize = false;
+    private bool isMoveGame = false;
 
     private float nextPosition = 10f;
     private float target = 0;
@@ -29,7 +33,9 @@ public class GameController : MonoBehaviour
     public static int score = 0;
 
     private void Awake()
-    {  
+    {
+        targetPosition.transform.localPosition = new Vector3(enemyPosition.transform.localPosition.x, enemyPosition.transform.localPosition.y, 11f);
+
         GameObject[] heartObject = GameObject.FindGameObjectsWithTag("Heart");
         for (int i = 0; i < heartObject.Length; i++) heart[i] = heartObject[i].GetComponent<Image>();
 
@@ -43,7 +49,7 @@ public class GameController : MonoBehaviour
 
         scoreText.GetComponent<Text>().text = "x" + score;
 
-        if (isNormalize) Normalize();
+        if (isMoveGame) MoveGame();
 
         if (Enemy.isDead)
         {
@@ -68,7 +74,7 @@ public class GameController : MonoBehaviour
                 force = 0;
                 nextPosition += 10f;
                 isTraffic = false;
-                isNormalize = true;
+                isMoveGame = true;
                 isInstantiate = false;
                 Enemy.isDead = false;
             }
@@ -82,12 +88,11 @@ public class GameController : MonoBehaviour
 
         if (Enemy.isMoveToFire)
         {
+
             Enemy.isMoveToFire = false;
-            Invoke(nameof(MoveToFire), 1f);
-            Invoke(nameof(DestroyFire), 1.5f);
+            Invoke(nameof(MoveFire), 1f);
             Invoke(nameof(ScorePlus), 2f);
-            Invoke(nameof(MoveToFireBack), 3f);
-            Invoke(nameof(ReturnIsDeadTrue), 5f);
+            Invoke(nameof(ReturnIsDeadTrue), 2.5f);
         }
     }
 
@@ -100,23 +105,26 @@ public class GameController : MonoBehaviour
         heart[index].sprite = heartSprite[1];
     }
 
-    private void Normalize()
+    private void MoveGame()
     {
-        isNormalize = false;
+        isMoveGame = false;
         _camera.transform.position = new Vector3(Convert.ToInt32(_camera.transform.localPosition.x), _camera.transform.localPosition.y, -10f);
     }
 
-    private void PlayAimationCharacter(string animationName)
+    private void PlayAimationCharacter(string animationName, bool isActive, bool isDestroy = false)
     {
-        GameObject character = GameObject.FindGameObjectWithTag("Character");
-        Animation characterAnimation = character.GetComponent<Animation>();
-        characterAnimation.clip = characterAnimation[animationName].clip;
-        characterAnimation.Play();
+        GameObject fire = GameObject.FindGameObjectWithTag("Fire");
+        Animator fireAnimator = fire.GetComponent<Animator>();
+        fireAnimator.SetBool("isFireMove", isActive);
+
+        if (isDestroy) Destroy(fire);
     }
 
-    private void ScorePlus() => score++;
-    private void MoveToFire() => PlayAimationCharacter("MoveToFire");
-    private void MoveToFireBack() => PlayAimationCharacter("MoveToFireBack");
-    private void DestroyFire() => Destroy(GameObject.FindGameObjectWithTag("Fire"), 1.5f);
+    private void ScorePlus()
+    {
+        PlayAimationCharacter("MoveFire", false, true);
+        score++;
+    }
+    private void MoveFire() => PlayAimationCharacter("MoveFire", true);
     private void ReturnIsDeadTrue() => Enemy.isDead = true;
 }

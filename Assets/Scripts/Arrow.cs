@@ -38,8 +38,6 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bow"))
         {
-            //GetComponent<PolygonCollider2D>().enabled = false;
-
             Bow.isMouseDown = false;
             Bow.isArrow = true;
             Destroy(gameObject);
