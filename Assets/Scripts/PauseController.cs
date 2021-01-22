@@ -5,8 +5,7 @@ using UnityEngine;
 public class PauseController : MonoBehaviour
 {
     public GameObject pausePanel;
-    public void PauseGame() 
-    {
+    public void PauseGame() {
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
     }

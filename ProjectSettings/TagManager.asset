@@ -52,3 +52,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: StartMenu
+    uniqueID: 27744745
+    locked: 0
+  - name: Gameplay
+    uniqueID: 543350309
+    locked: 0
