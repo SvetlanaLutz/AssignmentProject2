@@ -18,6 +18,6 @@ public class CanvasController : MonoBehaviour
         Bow.isArrow = true;
         Bow.isMouseDown = true;
         Bow.nameColor = null;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(1);
     }
 }

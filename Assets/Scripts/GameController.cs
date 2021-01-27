@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class GameController : MonoBehaviour
     public GameObject ColorsPrefab;
 
     public static int score = 0;
+    
 
     private void Awake()
     {
@@ -120,7 +122,13 @@ public class GameController : MonoBehaviour
     {
         PlayAimationCharacter("MoveFire", false, true);
         score++;
+        if(score == 2){
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //highscore = score;
+            score = 0;
+        }
     }
     private void MoveFire() => PlayAimationCharacter("MoveFire", true);
     private void ReturnIsDeadTrue() => Enemy.isDead = true;
 }
+
