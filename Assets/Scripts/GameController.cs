@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        finalTextScore.text = "Score: " + score;
+        finalTextScore.text = score.ToString();
         scoreText.GetComponent<Text>().text = "x" + score;
 
         if (isMoveGame) MoveGame();
