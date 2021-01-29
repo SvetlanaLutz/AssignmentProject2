@@ -3842,12 +3842,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Animations.Array.data[11]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7400000, guid: 0622a9e87d7975d4d9c9f22bdc57d96d, type: 2}
     - target: {fileID: 153276601454102635, guid: 9b775c04396728847898d50d9d19976c,
         type: 3}
       propertyPath: m_Animations.Array.data[12]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7400000, guid: 372a37c5c20b6a2418125e04fd8d1c04, type: 2}
     - target: {fileID: 153276601454102635, guid: 9b775c04396728847898d50d9d19976c,
         type: 3}
       propertyPath: m_Animations.Array.data[7]
@@ -3857,7 +3857,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Animations.Array.data[13]
       value: 
-      objectReference: {fileID: 7400000, guid: 318dbb0c9c857bc4e986f9a6ad4872c0, type: 2}
+      objectReference: {fileID: 7400000, guid: 372a37c5c20b6a2418125e04fd8d1c04, type: 2}
+    - target: {fileID: 153276601454102635, guid: 9b775c04396728847898d50d9d19976c,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 153276601454102644, guid: 9b775c04396728847898d50d9d19976c,
         type: 3}
       propertyPath: _animationClip.Array.size
@@ -3887,12 +3892,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _animationClip.Array.data[11]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7400000, guid: 0622a9e87d7975d4d9c9f22bdc57d96d, type: 2}
     - target: {fileID: 153276601454102644, guid: 9b775c04396728847898d50d9d19976c,
         type: 3}
       propertyPath: _animationClip.Array.data[12]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7400000, guid: 372a37c5c20b6a2418125e04fd8d1c04, type: 2}
     - target: {fileID: 153276601454102644, guid: 9b775c04396728847898d50d9d19976c,
         type: 3}
       propertyPath: _animationClip.Array.data[13]
