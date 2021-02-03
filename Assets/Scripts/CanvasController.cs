@@ -7,6 +7,9 @@ public class CanvasController : MonoBehaviour
 {
     public void ReloadGame()
     {
+        GameController controller = FindObjectOfType<GameController>();
+        controller.IndexColors = 0;
+        controller.SpeedColors = 1.0f;
         GameController.score = 0;
         GameController.isGame = true;
         Enemy.isMoveToFire = false;

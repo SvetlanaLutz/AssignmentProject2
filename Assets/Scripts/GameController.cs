@@ -12,9 +12,13 @@ public class GameController : MonoBehaviour
     [SerializeField] Sprite[] heartSprite;
     [SerializeField] Image[] heart;
     [SerializeField] Text finalTextScore;
+    public float SpeedColors = 1.0f;
+    public int IndexColors = 0;
+    public float NextSpeed = 0.5f;
 
     public static int scoreHeart;
     public static bool isGame = true;
+    public static bool isZero = false;
     public static bool isFirstScore = true;
     public static bool isTakeOneHeartAway = false;
     private Camera _camera => Camera.main;
@@ -25,7 +29,7 @@ public class GameController : MonoBehaviour
 
     private float nextPosition = 10f;
     private float target = 0;
-    public float force = 0;
+    private float force = 0;
     public GameObject scoreText => GameObject.FindGameObjectWithTag("Score");
     public GameObject CharacterBotPrefab;
     public GameObject ColorsPrefab;
@@ -35,13 +39,20 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         targetPosition.transform.localPosition = new Vector3(enemyPosition.transform.localPosition.x, enemyPosition.transform.localPosition.y, 11f);
-        string a = "";
         for (int i = 0; i < heart.Length; i++) heart[i].sprite = heartSprite[0];
         scoreHeart = heart.Length;
     }
 
     private void Update()
     {
+        if (isZero)
+        {
+            isZero = false;
+            SpeedColors += NextSpeed;
+            IndexColors = 0;
+            BarrierScript barrier = FindObjectOfType<BarrierScript>();
+            barrier.PlayAnimation(IndexColors, SpeedColors);
+        }
         finalTextScore.text = score.ToString();
         scoreText.GetComponent<Text>().text = "x" + score;
 
@@ -107,7 +118,7 @@ public class GameController : MonoBehaviour
         _camera.transform.position = new Vector3(Convert.ToInt32(_camera.transform.localPosition.x), _camera.transform.localPosition.y, -10f);
     }
 
-    private void PlayAimationCharacter(string animationName, bool isActive, bool isDestroy = false)
+    private void PlayAimationFire(bool isActive, bool isDestroy = false)
     {
         GameObject fire = GameObject.FindGameObjectWithTag("Fire");
         Animator fireAnimator = fire.GetComponent<Animator>();
@@ -118,9 +129,10 @@ public class GameController : MonoBehaviour
 
     private void ScorePlus()
     {
-        PlayAimationCharacter("MoveFire", false, true);
+        PlayAimationFire(false, true);
         score++;
+        IndexColors++;
     }
-    private void MoveFire() => PlayAimationCharacter("MoveFire", true);
+    private void MoveFire() => PlayAimationFire(true);
     private void ReturnIsDeadTrue() => Enemy.isDead = true;
 }
