@@ -5,14 +5,18 @@ using UnityEngine;
 public class MuteScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    
+    private bool isMuted;
     void Start()
     {
-        
+    isMuted = false;
     }
+        
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+public void MutePressed()
+        {
+            isMuted = !isMuted;
+            AudioListener.pause = !AudioListener.pause;
+        }
 }
