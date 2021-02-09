@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public static GameObject targetPosition => GameObject.FindGameObjectWithTag("Target");
     private GameObject enemyPosition => GameObject.FindGameObjectWithTag("Player");
 
     [SerializeField] Sprite[] heartSprite;
@@ -33,12 +32,12 @@ public class GameController : MonoBehaviour
     public GameObject scoreText => GameObject.FindGameObjectWithTag("Score");
     public GameObject CharacterBotPrefab;
     public GameObject ColorsPrefab;
+    public GameObject TargetFire;
 
     public static int score = 0;
 
     private void Awake()
     {
-        targetPosition.transform.localPosition = new Vector3(enemyPosition.transform.localPosition.x, enemyPosition.transform.localPosition.y, 11f);
         for (int i = 0; i < heart.Length; i++) heart[i].sprite = heartSprite[0];
         scoreHeart = heart.Length;
     }
@@ -69,10 +68,10 @@ public class GameController : MonoBehaviour
                 Instantiate(ColorsPrefab, transform.position = new Vector3(ColorsPrefab.transform.localPosition.x + nextPosition, 0, 0), transform.rotation);
                 Instantiate(CharacterBotPrefab, transform.position = new Vector2(CharacterBotPrefab.transform.localPosition.x + nextPosition, -1.13f), transform.rotation);
             }
+
             if (isTraffic) 
             {
                 force += Time.deltaTime;
-
                 _camera.transform.position = new Vector3(_camera.transform.localPosition.x + force, _camera.transform.localPosition.y, -10f);
             }
 

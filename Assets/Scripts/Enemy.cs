@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public GameObject Lose => GameObject.FindGameObjectWithTag("Lose");
     public GameObject Colors;
     public GameObject FirePrefab;
+    public GameObject TargetPoint;
 
     public static List<string> descriptionName = new List<string>();
     public static List<Color> descriptionColor = new List<Color>();
@@ -107,7 +108,9 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(FirePrefab, transform);
             GameObject fire = GameObject.FindGameObjectWithTag("Fire");
-            fire.transform.parent = GameController.targetPosition.transform;
+            GameObject target = GameObject.FindGameObjectWithTag("Target");
+            fire.transform.parent = target.transform;
+            fire.transform.position = new Vector3(0, 0, 0);
             fire.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
         nameColor = null;
