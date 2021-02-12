@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour
             Enemy.isMoveToFire = false;
             Invoke(nameof(MoveFire), 1f);
             Invoke(nameof(ScorePlus), 2f);
-            Invoke(nameof(Enemy.ReturnIsDeadTrue), 2.5f);
+            Invoke(nameof(ReturnIsDeadTrue), 2.5f);
         }
     }
 
@@ -108,7 +108,6 @@ public class GameController : MonoBehaviour
     {
         isTakeOneHeartAway = false;
         isFirstScore = false;
-        scoreHeart--;
         for (int i = 0; i < index; i++) heart[i].sprite = heartSprite[0];
         heart[index].sprite = heartSprite[1];
     }
@@ -136,4 +135,6 @@ public class GameController : MonoBehaviour
         IndexColors++;
     }
     private void MoveFire() => PlayAimationFire(true);
+
+    public void ReturnIsDeadTrue() => Enemy.isDead = true;
 }

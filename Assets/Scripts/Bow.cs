@@ -22,7 +22,7 @@ public class Bow : MonoBehaviour
 
     public int pointCount;
     //audio 
-    public AudioSource BowEffect;
+    public AudioSource BowEffect => GetComponent<AudioSource>();
     private void Awake() => InstantiateArrow(transform.GetChild(0).transform);
 
     private void Start()
@@ -30,8 +30,6 @@ public class Bow : MonoBehaviour
         _rigidbody = transform.GetChild(0).GetChild(0).GetComponent<Rigidbody2D>();
 
         _arrayTrajectoryPoints = new GameObject[pointCount];
-      
-        
     }
     
     private void Update()
@@ -87,7 +85,8 @@ public class Bow : MonoBehaviour
 //destruction points after hit
             for (int i = 0; i < pointCount; i++) Destroy(_arrayTrajectoryPoints[i]);
               //audio 
-        BowEffect.Play();
+
+            BowEffect.Play();
         }
     }
 

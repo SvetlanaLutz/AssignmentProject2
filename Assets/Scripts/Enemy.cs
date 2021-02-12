@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     //start animation and timeout
     {
+        Colors = GameObject.FindGameObjectWithTag("Colors");
         Time.timeScale = 1f;
         Random rand = new Random();
 
@@ -39,7 +40,6 @@ public class Enemy : MonoBehaviour
             if (nameColor == null)
             {
                 _spriteRenderer.color = descriptionColors[index].color;
-                _spriteRenderer.name = descriptionColors[index].name;
                 nameColor = descriptionColors[index].name;
             }
         }
@@ -80,6 +80,7 @@ public class Enemy : MonoBehaviour
                 {
                     if (GameController.scoreHeart >= 0)
                     {
+                        GameController.scoreHeart--;
                         GameController.isTakeOneHeartAway = true;
                     }
                 }

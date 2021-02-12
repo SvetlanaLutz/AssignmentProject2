@@ -1768,7 +1768,7 @@ SpriteRenderer:
   m_Size: {x: 1.88, y: 1.74}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1091562350
@@ -3589,7 +3589,7 @@ MonoBehaviour:
   - {fileID: 1937127414}
   - {fileID: 2113354372}
   - {fileID: 482676522}
-  finalTextScore: {fileID: 0}
+  finalTextScore: {fileID: 1915217266}
   SpeedColors: 0.5
   IndexColors: 0
   NextSpeed: 0.25
@@ -3825,7 +3825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1950124037
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4094,7 +4094,7 @@ SpriteRenderer:
   m_Size: {x: 1.88, y: 1.74}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2050588113
@@ -4688,11 +4688,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Colors
-      objectReference: {fileID: 0}
-    - target: {fileID: 153276601454102633, guid: 9b775c04396728847898d50d9d19976c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 153276601454102634, guid: 9b775c04396728847898d50d9d19976c,
         type: 3}

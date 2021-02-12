@@ -100,17 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptionColors:
   - name: Blue
-    color:
-      serializedVersion: 2
-      rgba: 4294309120
+    color: {r: 0, g: 1, b: 1, a: 1}
   - name: Green
-    color:
-      serializedVersion: 2
-      rgba: 4278252800
+    color: {r: 0, g: 1, b: 0, a: 1}
   - name: Purple
-    color:
-      serializedVersion: 2
-      rgba: 4293198053
+    color: {r: 1, g: 0, b: 1, a: 1}
   animationClip:
   - {fileID: 7400000, guid: fb34188cc0c6ce140ab0715f1f6a3a78, type: 2}
   - {fileID: 7400000, guid: 6643e49e2e060de4c90d99bd5b9d0e07, type: 2}
