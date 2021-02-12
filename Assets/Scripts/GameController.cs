@@ -6,25 +6,27 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    private GameObject enemyPosition => GameObject.FindGameObjectWithTag("Player");
-
     [SerializeField] Sprite[] heartSprite;
     [SerializeField] Image[] heart;
     [SerializeField] Text finalTextScore;
-    public float SpeedColors = 1.0f;
+//im tierd of this 
+    public float SpeedColors = 0.5f;
     public int IndexColors = 0;
     public float NextSpeed = 0.5f;
-
+// i dot know if i need describe this but i guess its okay to understand 
     public static int scoreHeart;
     public static bool isGame = true;
     public static bool isZero = false;
     public static bool isFirstScore = true;
+    //this is to solve a problem with bug when one arrow take two hearth because he tuch enemy to times or three 
     public static bool isTakeOneHeartAway = false;
     private Camera _camera => Camera.main;
 
     private bool isTraffic = true;
+//creating charaters behind camera i think its here 
     private bool isInstantiate = false;
-    private bool isMoveGame = false;
+//here is about how camera will turn back 
+    private bool isRound = false;
 
     private float nextPosition = 10f;
     private float target = 0;
@@ -32,7 +34,6 @@ public class GameController : MonoBehaviour
     public GameObject scoreText => GameObject.FindGameObjectWithTag("Score");
     public GameObject CharacterBotPrefab;
     public GameObject ColorsPrefab;
-    public GameObject TargetFire;
 
     public static int score = 0;
 
@@ -43,19 +44,21 @@ public class GameController : MonoBehaviour
     }
 
     private void Update()
+    // oh i dont remember i think when all lvels get finish u have the same one but different speed 
     {
         if (isZero)
         {
             isZero = false;
             SpeedColors += NextSpeed;
             IndexColors = 0;
-            BarrierScript barrier = FindObjectOfType<BarrierScript>();
+            ColorBarrier barrier = FindObjectOfType<ColorBarrier>();
             barrier.PlayAnimation(IndexColors, SpeedColors);
         }
-        finalTextScore.text = score.ToString();
+//our score in lose icon 
+        finalTextScore.text = "x" + score;
         scoreText.GetComponent<Text>().text = "x" + score;
-
-        if (isMoveGame) MoveGame();
+//we move camera and respond to creating characters and circles that behind camera
+        if (isRound) RoundPositionCamera();
 
         if (Enemy.isDead)
         {
@@ -80,7 +83,7 @@ public class GameController : MonoBehaviour
                 force = 0;
                 nextPosition += 10f;
                 isTraffic = false;
-                isMoveGame = true;
+                isRound = true;
                 isInstantiate = false;
                 Enemy.isDead = false;
             }
@@ -94,11 +97,10 @@ public class GameController : MonoBehaviour
 
         if (Enemy.isMoveToFire)
         {
-
             Enemy.isMoveToFire = false;
             Invoke(nameof(MoveFire), 1f);
             Invoke(nameof(ScorePlus), 2f);
-            Invoke(nameof(ReturnIsDeadTrue), 2.5f);
+            Invoke(nameof(Enemy.ReturnIsDeadTrue), 2.5f);
         }
     }
 
@@ -106,23 +108,24 @@ public class GameController : MonoBehaviour
     {
         isTakeOneHeartAway = false;
         isFirstScore = false;
-
+        scoreHeart--;
         for (int i = 0; i < index; i++) heart[i].sprite = heartSprite[0];
         heart[index].sprite = heartSprite[1];
     }
 
-    private void MoveGame()
+    private void RoundPositionCamera()
     {
-        isMoveGame = false;
+        isRound = false;
         _camera.transform.position = new Vector3(Convert.ToInt32(_camera.transform.localPosition.x), _camera.transform.localPosition.y, -10f);
     }
 
     private void PlayAimationFire(bool isActive, bool isDestroy = false)
     {
+        //start the animation of the fire and destruction of it 
         GameObject fire = GameObject.FindGameObjectWithTag("Fire");
+        if (fire == null) return;
         Animator fireAnimator = fire.GetComponent<Animator>();
         fireAnimator.SetBool("isFireMove", isActive);
-
         if (isDestroy) Destroy(fire);
     }
 
@@ -133,5 +136,4 @@ public class GameController : MonoBehaviour
         IndexColors++;
     }
     private void MoveFire() => PlayAimationFire(true);
-    private void ReturnIsDeadTrue() => Enemy.isDead = true;
 }

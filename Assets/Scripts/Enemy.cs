@@ -5,55 +5,51 @@ using Random = System.Random;
 
 public class Enemy : MonoBehaviour
 {
+    //to make a character lose color and dissaper with arrow
     [SerializeField] DescriptionColor[] descriptionColors;
     [SerializeField] AnimationClip[] animationClip;
-
+//we take a component and put it to the rebder sprite
     private SpriteRenderer _spriteRenderer => transform.GetChild(0).GetComponent<SpriteRenderer>();
     private Animation _animation => GetComponent<Animation>();
-
+// we animate the dead colors to make it dissaper
     public AnimationClip deadColors;
+    //we are looking for tag 
     public GameObject Lose => GameObject.FindGameObjectWithTag("Lose");
     public GameObject Colors;
+    //we create prefab that will create a fire
     public GameObject FirePrefab;
-    public GameObject TargetPoint;
-
-    public static List<string> descriptionName = new List<string>();
-    public static List<Color> descriptionColor = new List<Color>();
 
     public static bool isMoveToFire = false;
-    public static bool isAlpha = true;
     public static bool isDead = false;
+    //herewe say about color data and with we refering to
     public static string nameColor;
-    public static Color color;
-
+//points
     [Space(5)] public float ReturnTime = 1f;
 
     private void Awake()
+    //start animation and timeout
     {
-        Colors = GameObject.FindGameObjectWithTag("Colors");
-
         Time.timeScale = 1f;
         Random rand = new Random();
 
         for (int i = 0; i < descriptionColors.Length; i++)
         {
-            descriptionName.Add(descriptionColors[i].name);
-            descriptionColor.Add(descriptionColors[i].color);
-
             int index = rand.Next(0, descriptionColors.Length);
 
             if (nameColor == null)
             {
-                _spriteRenderer.color = descriptionColors[index].color;
+                //_spriteRenderer.color = descriptionColors[index].color;
+                _spriteRenderer.name = descriptionColors[index].name;
                 nameColor = descriptionColors[index].name;
-                color = descriptionColors[index].color;
             }
         }
     }
 
+//we check what will happen if we died we run the function after two seconds and call the lose function 
     private void Update() { if (GameController.scoreHeart == 0) Invoke(nameof(ViewLose), 2f); }
 
     private void OnCollisionEnter2D(Collision2D collision)
+    //we check here if the colour of arrow its right or no 
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
@@ -61,10 +57,9 @@ public class Enemy : MonoBehaviour
             {
                 Arrow.isColor = true;
                 Bow.isArrow = true;
-                isAlpha = false;
 
                 collision.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-
+// options of colour with can change
                 switch (nameColor)
                 {
                     case "Green":
@@ -86,7 +81,6 @@ public class Enemy : MonoBehaviour
                     if (GameController.scoreHeart >= 0)
                     {
                         GameController.isTakeOneHeartAway = true;
-                        GameController.scoreHeart--;
                     }
                 }
             }
@@ -111,7 +105,6 @@ public class Enemy : MonoBehaviour
             GameObject target = GameObject.FindGameObjectWithTag("Target");
             fire.transform.parent = target.transform;
             fire.transform.position = new Vector3(0, 0, 0);
-            fire.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
         }
         nameColor = null;
         _animation.clip = animationClip[index];
@@ -124,12 +117,12 @@ public class Enemy : MonoBehaviour
 
         GameObject colorsAnimation = GameObject.FindGameObjectWithTag("Colors");
         Animation _animation = colorsAnimation.GetComponent<Animation>();
-
+//clor fanding animation
         _animation.clip = deadColors;
         _animation.Play();
 
         isMoveToFire = true;
-
+        //camera movement 
         PlayAnimation(0);
         collision.gameObject.GetComponent<Animation>().Play();
         Destroy(gameObject, 2f);

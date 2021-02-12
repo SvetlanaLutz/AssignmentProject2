@@ -6,6 +6,7 @@ public class MainMenuTwo : MonoBehaviour {
 
     public void PlayGame ()
     {
+        Enemy.nameColor = null;
         SceneManager.LoadScene(1);
     }
 

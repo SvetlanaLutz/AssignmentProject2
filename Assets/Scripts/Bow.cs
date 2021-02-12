@@ -8,22 +8,21 @@ public class Bow : MonoBehaviour
     private Vector2 bowPosition => transform.position;
     private Vector2 direction => (touchPosition - bowPosition) * (-1);
     private Transform _transformArrow => transform.GetChild(0).GetChild(0).transform;
-
+//physics
     public static bool isArrow = true;
     public static bool isMouseDown = true;
 
     private Rigidbody2D _rigidbody;
-
+//creating direction pointss
     private GameObject[] _arrayTrajectoryPoints;
     public GameObject trajectoryPoint;
     public GameObject ArrowPrefab;
-
+//pulling the bow
     public float forceRepulsion;
 
     public int pointCount;
-
-    public static string nameColor;
-
+    //audio 
+    public AudioSource BowEffect;
     private void Awake() => InstantiateArrow(transform.GetChild(0).transform);
 
     private void Start()
@@ -31,9 +30,12 @@ public class Bow : MonoBehaviour
         _rigidbody = transform.GetChild(0).GetChild(0).GetComponent<Rigidbody2D>();
 
         _arrayTrajectoryPoints = new GameObject[pointCount];
+      
+        
     }
-
+    
     private void Update()
+    //its all about physics and what will happen if we ht some thing
     {
         if (GameController.isGame)
         {
@@ -82,11 +84,14 @@ public class Bow : MonoBehaviour
             _rigidbody.gravityScale = 1;
             _rigidbody.velocity = new Vector2(direction.x * forceRepulsion, direction.y * forceRepulsion);
             _transformArrow.GetComponent<PolygonCollider2D>().enabled = true;
-
+//destruction points after hit
             for (int i = 0; i < pointCount; i++) Destroy(_arrayTrajectoryPoints[i]);
+              //audio 
+        BowEffect.Play();
         }
     }
 
+//the arro lives the bo then we turn off the box colider
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Arrow")) PolygonTriggerActive();
