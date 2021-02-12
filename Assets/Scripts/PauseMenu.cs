@@ -10,12 +10,14 @@ public class Pause : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Resuming the game
         pauseMenu.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //This is a code of pausing the game using esc key(We didn't use it)
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(isPaused)
@@ -29,13 +31,16 @@ public class Pause : MonoBehaviour
     }
 
     public void PauseGame()
+    //Pausing the game
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
+    //
     public void ResumeGame()
+    //Resuming the game
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
@@ -43,6 +48,7 @@ public class Pause : MonoBehaviour
     }
 
     public void GoToMainMenu()
+    //Load to the start scene
     {
         SceneManager.LoadScene("Start scene");
     }
