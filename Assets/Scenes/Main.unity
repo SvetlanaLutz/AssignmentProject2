@@ -1262,7 +1262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e0b918e119d774293af51b837c6cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 857118635}
 --- !u!95 &802982702
 Animator:
   serializedVersion: 3
@@ -1768,7 +1767,7 @@ SpriteRenderer:
   m_Size: {x: 1.88, y: 1.74}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1091562350
@@ -4094,7 +4093,7 @@ SpriteRenderer:
   m_Size: {x: 1.88, y: 1.74}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2050588113
@@ -4320,7 +4319,6 @@ MonoBehaviour:
     type: 3}
   forceRepulsion: 7
   pointCount: 10
-  BowEffect: {fileID: 2073054738}
 --- !u!61 &2073054740
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4398,7 +4396,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e0b918e119d774293af51b837c6cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 857118635}
 --- !u!4 &2075344941
 Transform:
   m_ObjectHideFlags: 0
