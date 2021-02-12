@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
 
             if (nameColor == null)
             {
-                //_spriteRenderer.color = descriptionColors[index].color;
+                _spriteRenderer.color = descriptionColors[index].color;
                 _spriteRenderer.name = descriptionColors[index].name;
                 nameColor = descriptionColors[index].name;
             }

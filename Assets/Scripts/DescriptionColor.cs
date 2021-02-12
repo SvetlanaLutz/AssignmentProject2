@@ -7,5 +7,5 @@ using UnityEngine;
 public class DescriptionColor
 {
     public string name;
-    public Color color;
+    public Color32 color;
 }
